@@ -76,5 +76,4 @@ public class Vendor {
 
     public void setCustomerScore(Integer feedbackScore) { this.feedbackScore.set(feedbackScore); }
 
-    // 省略其他部分
 }

@@ -42,7 +42,7 @@
                               <TableColumn prefWidth="75.0" text="Product ID" />
                               <TableColumn prefWidth="75.0" text="Name" />
                               <TableColumn prefWidth="75.0" text="Price" />
-                              <TableColumn prefWidth="75.0" text="Tag" />
+                              <TableColumn prefWidth="75.0" text="Vendor Id" />
                            </columns>
                         </TableView>
                         <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" text="Add" />
@@ -59,7 +59,7 @@
                               <TableColumn prefWidth="75.0" text="Product ID" />
                               <TableColumn prefWidth="75.0" text="Name" />
                               <TableColumn prefWidth="75.0" text="Price" />
-                              <TableColumn prefWidth="75.0" text="Tag" />
+                              <TableColumn prefWidth="75.0" text="Vendor Id" />
                            </columns>
                         </TableView>
                         <TextField layoutX="14.0" layoutY="15.0" />
