@@ -8,26 +8,25 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author xujingling
- */
+
 public class Vendor {
     private final SimpleIntegerProperty vendorId = new SimpleIntegerProperty(this, "vendorId");
     private final SimpleStringProperty businessName = new SimpleStringProperty(this, "businessName");
     private final SimpleIntegerProperty feedbackScore = new SimpleIntegerProperty(this, "feedbackScore");
     private final SimpleStringProperty geographicalPresence = new SimpleStringProperty(this, "geographicalPresence");
-
+    private final SimpleIntegerProperty productInventory = new SimpleIntegerProperty(this, "productInventory");
     private Date createdDate;
     private Date updatedDate;
 
     public Vendor() {
     }
 
-    public Vendor(int vendorId, String businessName, int feedbackScore, String geographicalPresence) {
+    public Vendor(int vendorId, String businessName, int feedbackScore, String geographicalPresence, int productInventory) {
         this.vendorId.set(vendorId);
         this.businessName.set(businessName);
         this.feedbackScore.set(feedbackScore);
         this.geographicalPresence.set(geographicalPresence);
+        this.productInventory.set(productInventory);
         this.createdDate = new Date();
         this.updatedDate = new Date();
     }
@@ -72,6 +71,10 @@ public class Vendor {
     public void setBusinessName(String businessName) {
         this.businessName.set(businessName);
     }
+
+    public void setGeographicalPresence(String geographicalPresence) { this.geographicalPresence.set(geographicalPresence); }
+
+    public void setCustomerScore(Integer feedbackScore) { this.feedbackScore.set(feedbackScore); }
 
     // 省略其他部分
 }

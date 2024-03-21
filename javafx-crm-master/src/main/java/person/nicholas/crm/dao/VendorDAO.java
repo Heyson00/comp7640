@@ -1,10 +1,12 @@
 package person.nicholas.crm.dao;
 
+import person.nicholas.crm.entity.Vendor;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.*;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 
 //import net.javaguides.usermanagement.model.User;
 
@@ -16,6 +18,18 @@ public class VendorDAO{
     static final String PASS = "qwe55701417";
 
     public static void main(String[] args) {
+        ArrayList<Vendor> list = getVendorSql();
+//        if(list.size() == 0){
+//            System.out.println("暂无数据");
+//        }else{
+//            for(Vendor v: list){  //遍历集合数据
+//                System.out.println(v.getVendorId()+"\t"+v.getBusinessName()+"\t"+v.getFeedbackScore()+"\t"+v.getGeographicalPresence());
+//            }
+//        }
+
+    }
+    public static ArrayList<Vendor> getVendorSql(){
+        ArrayList<Vendor> vendorList = new ArrayList<Vendor>();
         Connection conn = null;
         Statement stmt = null;
         try{
@@ -28,19 +42,19 @@ public class VendorDAO{
             // 执行查询
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT vendor_id, business_name, customer_feedback_score, product_inventory FROM vendor";
+            sql = "SELECT * FROM vendor";
             ResultSet rs = stmt.executeQuery(sql);
 
             // 展开结果集数据库
             while(rs.next()){
                 // 通过字段检索
-                int id  = rs.getInt("vendor_id");
-                String name = rs.getString("business_name");
+                Vendor v = new Vendor();
+                v.setVendorId(rs.getInt("vendor_id"));
+                v.setBusinessName(rs.getString("business_name"));
+                v.setCustomerScore(rs.getInt("customer_feedback_score"));
+                v.setGeographicalPresence(rs.getString("geo_presence"));
 
-                // 输出数据
-                System.out.print("ID: " + id);
-                System.out.print("Name: " + name);
-                System.out.print("\n");
+                vendorList.add(v);
             }
             // 完成后关闭
             rs.close();
@@ -64,5 +78,6 @@ public class VendorDAO{
                 se.printStackTrace();
             }
         }
+        return vendorList;
     }
 }

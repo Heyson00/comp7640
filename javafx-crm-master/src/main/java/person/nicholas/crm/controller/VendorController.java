@@ -6,13 +6,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import person.nicholas.crm.dao.VendorDAO;
 
-/**
- * @Description:
- * @Copyright : 2024 .ALL Rights Reserved OrBit 华磊迅拓
- * @Author : xujingling
- * @Version : 1.0
- * @Date : 2024/3/21
- */
+
 public class VendorController {
     @FXML
     private TextField businessName;

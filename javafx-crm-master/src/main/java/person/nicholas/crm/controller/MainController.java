@@ -1,5 +1,6 @@
 package person.nicholas.crm.controller;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +38,7 @@ public class MainController {
     private TableColumn<Vendor, Integer> feedbackScore;
     @FXML
     private TableColumn<Vendor, String> vendorId;
+    private ObservableList<Vendor> vendorData = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
@@ -45,6 +47,8 @@ public class MainController {
         geographicalPresence.setCellValueFactory(cellData -> cellData.getValue().geographicalPresenceProperty());
         feedbackScore.setCellValueFactory(cellData -> cellData.getValue().feedbackScoreProperty().asObject());
         vendorId.setCellValueFactory(cellData -> cellData.getValue().vendorIdProperty().asObject().asString());
+
+        vendorView.setItems(vendorData);
     }
 
     @FXML
