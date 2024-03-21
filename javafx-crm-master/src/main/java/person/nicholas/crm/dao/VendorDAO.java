@@ -12,20 +12,20 @@ import java.util.ArrayList;
 
 public class VendorDAO{
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/vendor_system?useSSL=false";
+    static final String DB_URL = "jdbc:mysql://hkg1.clusters.zeabur.com:31183/vendor_system?useSSL=false";
     // 数据库的用户名与密码，需要根据自己的设置
     static final String USER = "root";
-    static final String PASS = "qwe55701417";
+    static final String PASS = "a6L15HnBQImgxt3zG2b0cUJ8Ks4R7Z9p";
 
     public static void main(String[] args) {
         ArrayList<Vendor> list = getVendorSql();
-//        if(list.size() == 0){
-//            System.out.println("暂无数据");
-//        }else{
-//            for(Vendor v: list){  //遍历集合数据
-//                System.out.println(v.getVendorId()+"\t"+v.getBusinessName()+"\t"+v.getFeedbackScore()+"\t"+v.getGeographicalPresence());
-//            }
-//        }
+        if(list.size() == 0){
+            System.out.println("暂无数据");
+        }else{
+            for(Vendor v: list){  //遍历集合数据
+                System.out.println(v.getVendorId()+"\t"+v.getBusinessName()+"\t"+v.getFeedbackScore()+"\t"+v.getGeographicalPresence());
+            }
+        }
 
     }
     public static ArrayList<Vendor> getVendorSql(){
