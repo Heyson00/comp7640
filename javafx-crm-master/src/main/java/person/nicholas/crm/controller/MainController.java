@@ -23,50 +23,6 @@ import java.io.IOException;
  */
 public class MainController {
 
-    @FXML
-    private Button addVendor;
-    @FXML
-    private TableView<Vendor> vendorView;
-    @FXML
-    private TableColumn<Vendor, String> businessName;
-    @FXML
-    private TableColumn<Vendor, String> geographicalPresence;
-    @FXML
-    private TableColumn<Vendor, Integer> feedbackScore;
-    @FXML
-    private TableColumn<Vendor, String> vendorId;
 
-    private VendorDao vendorDao = new VendorDao();
 
-    @FXML
-    private void initialize() {
-        // Initialize the table columns
-        businessName.setCellValueFactory(cellData -> cellData.getValue().businessNameProperty());
-        geographicalPresence.setCellValueFactory(cellData -> cellData.getValue().geographicalPresenceProperty());
-        feedbackScore.setCellValueFactory(cellData -> cellData.getValue().feedbackScoreProperty().asObject());
-        vendorId.setCellValueFactory(cellData -> cellData.getValue().vendorIdProperty().asObject().asString());
-
-        // Populate the table
-        ObservableList<Vendor> data = FXCollections.observableArrayList(vendorDao.getVendorList());
-        vendorView.setItems(data);
-    }
-
-    @FXML
-    protected void onAddButtonClick() throws IOException {
-        //弹窗vendor-add
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("vendor-add.fxml"));
-        Parent popupContent = loader.load();
-
-        // Create the dialog Stage
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle("Add Vendor");
-        dialogStage.initOwner(addVendor.getScene().getWindow());
-        dialogStage.setScene(new Scene(popupContent));
-
-        dialogStage.showAndWait();
-
-        // Populate the table
-        ObservableList<Vendor> data = FXCollections.observableArrayList(vendorDao.getVendorList());
-        vendorView.setItems(data);
-    }
 }

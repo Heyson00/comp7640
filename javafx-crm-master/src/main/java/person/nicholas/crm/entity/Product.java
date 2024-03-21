@@ -1,19 +1,17 @@
 package person.nicholas.crm.entity;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.util.List;
 
 public class Product {
-//    private int productId;
-//    private String name;
-//    private double price;
-//    private List<String> tags;
     private final SimpleIntegerProperty productId = new SimpleIntegerProperty();
     private final SimpleStringProperty productName = new SimpleStringProperty();
     private final SimpleIntegerProperty listedPrice = new SimpleIntegerProperty();
     private final SimpleIntegerProperty vendorId = new SimpleIntegerProperty();
+    private final SimpleStringProperty tags = new SimpleStringProperty();
 
     public Product() {
     }
@@ -37,6 +35,10 @@ public class Product {
     public int getVendorId() { return  vendorId.get(); }
     public void setVendorId(int vendorId) { this.vendorId.set(vendorId); }
     public SimpleIntegerProperty vendorIdProperty() { return vendorId; }
+
+    public String getTags() { return tags.get(); }
+    public void setTags(String tags) { this.tags.set(tags); }
+    public SimpleStringProperty tagsProperty() { return tags; }
 
 
 

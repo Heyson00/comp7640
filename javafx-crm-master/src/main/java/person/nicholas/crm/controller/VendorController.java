@@ -3,38 +3,44 @@ package person.nicholas.crm.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import person.nicholas.crm.HelloApplication;
 import person.nicholas.crm.dao.VendorDao;
 import person.nicholas.crm.entity.Vendor;
+
+import java.io.IOException;
 
 
 public class VendorController {
     @FXML
-    private TextField businessName;
+    private TextField addBusinessName;
     @FXML
-    private TextField geographicalPresence;
+    private TextField addGeographicalPresence;
     @FXML
-    private TextField customerScore;
+    private TextField addCustomerScore;
     @FXML
-    private Button addVendor;
+    private Button addVendorOkButton;
+
+
     private final VendorDao vendorDao = new VendorDao();
 
     @FXML
-    protected void onAddButtonClick() {
+    protected void onOkButtonClick() {
         //Close dialog
         Vendor vendor = new Vendor();
-        vendor.setBusinessName(businessName.getText());
-        vendor.setGeographicalPresence(geographicalPresence.getText());
-        vendor.setCustomerScore(Integer.parseInt(customerScore.getText()));
+        vendor.setBusinessName(addBusinessName.getText());
+        vendor.setGeographicalPresence(addGeographicalPresence.getText());
+        vendor.setCustomerScore(Integer.parseInt(addCustomerScore.getText()));
         vendorDao.addVendor(vendor);
-        addVendor.getScene().getWindow().hide();
+        addVendorOkButton.getScene().getWindow().hide();
     }
 
-    //Close dialog
-    @FXML
-    protected void onCancelButtonClick() {
-        addVendor.getScene().getWindow().hide();
 
-    }
 }
