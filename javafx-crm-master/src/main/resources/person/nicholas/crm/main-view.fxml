@@ -29,7 +29,8 @@
                           </columns>
                         </TableView>
                         <Button fx:id="addVendor" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onAddButtonClick" text="Add" />
-                     </children></AnchorPane>
+                     </children>
+              </AnchorPane>
             </content>
           </Tab>
             <Tab text="Product Catolog">
