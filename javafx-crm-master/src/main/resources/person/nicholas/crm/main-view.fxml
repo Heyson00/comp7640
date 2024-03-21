@@ -23,7 +23,7 @@
                         <TableView fx:id="vendorView" layoutX="14.0" layoutY="48.0" prefHeight="405.0" prefWidth="484.0">
                           <columns>
                             <TableColumn fx:id="vendorId" prefWidth="75.0" text="Vendor ID" />
-                            <TableColumn fx:id="businessName" prefWidth="75.0" text="Name" />
+                            <TableColumn fx:id="businessName" prefWidth="125.0" text="Name" />
                               <TableColumn fx:id="feedbackScore" prefWidth="59.0" text="Score" />
                               <TableColumn fx:id="geographicalPresence" prefWidth="135.0" text="Geographical Presence" />
                           </columns>
@@ -43,6 +43,7 @@
                               <TableColumn prefWidth="75.0" text="Name" />
                               <TableColumn prefWidth="75.0" text="Price" />
                               <TableColumn prefWidth="75.0" text="Vendor Id" />
+                               <TableColumn prefWidth="75.0" text="Tag" />
                            </columns>
                         </TableView>
                         <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" text="Add" />
@@ -60,6 +61,7 @@
                               <TableColumn prefWidth="75.0" text="Name" />
                               <TableColumn prefWidth="75.0" text="Price" />
                               <TableColumn prefWidth="75.0" text="Vendor Id" />
+                               <TableColumn prefWidth="75.0" text="Tag" />
                            </columns>
                         </TableView>
                         <TextField layoutX="14.0" layoutY="15.0" />
