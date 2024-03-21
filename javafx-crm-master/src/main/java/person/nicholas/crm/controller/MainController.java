@@ -10,13 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import person.nicholas.crm.HelloApplication;
+import person.nicholas.crm.dao.VendorDao;
 import person.nicholas.crm.entity.Vendor;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Vendor Controller
@@ -29,8 +28,6 @@ public class MainController {
     @FXML
     private TableView<Vendor> vendorView;
     @FXML
-    private TextField addVendorField;
-    @FXML
     private TableColumn<Vendor, String> businessName;
     @FXML
     private TableColumn<Vendor, String> geographicalPresence;
@@ -38,7 +35,8 @@ public class MainController {
     private TableColumn<Vendor, Integer> feedbackScore;
     @FXML
     private TableColumn<Vendor, String> vendorId;
-    private ObservableList<Vendor> vendorData = FXCollections.observableArrayList();
+
+    private VendorDao vendorDao = new VendorDao();
 
     @FXML
     private void initialize() {
@@ -48,7 +46,9 @@ public class MainController {
         feedbackScore.setCellValueFactory(cellData -> cellData.getValue().feedbackScoreProperty().asObject());
         vendorId.setCellValueFactory(cellData -> cellData.getValue().vendorIdProperty().asObject().asString());
 
-        vendorView.setItems(vendorData);
+        // Populate the table
+        ObservableList<Vendor> data = FXCollections.observableArrayList(vendorDao.getVendorList());
+        vendorView.setItems(data);
     }
 
     @FXML
@@ -65,11 +65,8 @@ public class MainController {
 
         dialogStage.showAndWait();
 
-
-//        ObservableList<Vendor> data = vendorView.getItems();
-//        Vendor vendor = new Vendor(data.size() +1,addVendorField.getText(), 0, " ");
-//        data.add(vendor);
-//        addVendorField.setText("");
-//        vendorView.setItems(data);
+        // Populate the table
+        ObservableList<Vendor> data = FXCollections.observableArrayList(vendorDao.getVendorList());
+        vendorView.setItems(data);
     }
 }

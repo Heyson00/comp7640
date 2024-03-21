@@ -7,6 +7,7 @@ module person.nicholas.crm {
     requires org.kordamp.ikonli.javafx;
     requires static lombok;
     requires java.sql;
+    requires mysql.connector.j;
 
     opens person.nicholas.crm to javafx.fxml;
     exports person.nicholas.crm;
