@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="person.nicholas.crm.controller.ProductController"
+            prefHeight="270.0" prefWidth="370.0">
+    <TextField fx:id="addProductName" layoutX="139.0" layoutY="36.0" prefHeight="27.0" prefWidth="216.0"/>
+    <TextField fx:id="addListedPrice" layoutX="139.0" layoutY="72.0" prefHeight="27.0" prefWidth="216.0"/>
+    <TextField fx:id="addVendorId" layoutX="139.0" layoutY="108.0" prefHeight="27.0" prefWidth="216.0"/>
+    <TextField fx:id="addProductTag" layoutX="139.0" layoutY="144.0" prefHeight="27.0" prefWidth="216.0"/>
+    <Label layoutX="32.0" layoutY="36.0" text="Product Name"/>
+    <Label layoutX="32.0" layoutY="72.0" text="Listed Price"/>
+    <Label layoutX="32.0" layoutY="108.0" text="Vendor ID"/>
+    <Label layoutX="32.0" layoutY="144.0" text="Product Tag"/>
+    <Button fx:id="addProductOkButton" layoutX="139.0" layoutY="180.0" mnemonicParsing="false" onAction="#onOkButtonClick"
+            prefHeight="55.0" prefWidth="216.0" text="OK"/>
+</AnchorPane>

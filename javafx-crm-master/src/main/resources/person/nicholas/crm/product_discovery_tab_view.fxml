@@ -13,10 +13,10 @@
     <TableView layoutX="14.0" layoutY="48.0" prefHeight="405.0" prefWidth="486.0" fx:id="productTableView">
         <columns>
             <TableColumn prefWidth="75.0" text="Product ID" fx:id="productId"/>
-            <TableColumn prefWidth="75.0" text="Name" fx:id="productName"/>
+            <TableColumn prefWidth="125.0" text="Name" fx:id="productName"/>
             <TableColumn prefWidth="75.0" text="Price" fx:id="listedPrice"/>
             <TableColumn prefWidth="75.0" text="Vendor Name" fx:id="vendorName"/>
-            <TableColumn prefWidth="75.0" text="Tags" fx:id="tags"/>
+            <TableColumn prefWidth="115.0" text="Tags" fx:id="tags"/>
         </columns>
     </TableView>
     <TextField layoutX="14.0" layoutY="15.0" fx:id="searchProductField"/>
