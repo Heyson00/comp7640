@@ -84,11 +84,15 @@ public class ProductDao {
             String sqlTag;
             sqlProduct = "INSERT INTO product(product_name, listed_price, vendor_id) VALUES (?, ?, ?)";
 
-            pstmtP = dbConfig.getConnection().prepareStatement(sqlProduct);
+            pstmtP = dbConfig.getConnection().prepareStatement(sqlProduct, PreparedStatement.RETURN_GENERATED_KEYS);
             pstmtP.setString(1, p.getProductName());
             pstmtP.setInt(2, p.getListedPrice());
             pstmtP.setInt(3, p.getVendorId());
             pstmtP.executeUpdate();
+            ResultSet rs = pstmtP.getGeneratedKeys();
+            if(rs.next()){
+                p.setProductId(rs.getInt(1));
+            }
             
             //set tag
             String[] tags = p.getTags().split(",");
