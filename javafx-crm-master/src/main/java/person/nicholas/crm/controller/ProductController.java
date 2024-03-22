@@ -20,8 +20,6 @@ public class ProductController {
     @FXML
     private TextField addListedPrice;
     @FXML
-    private TextField addVendorId;
-    @FXML
     private ComboBox<Pair<Integer,String>> vendorNameCombo = new ComboBox<>();
     @FXML
     private Button addProductOkButton;
@@ -73,6 +71,7 @@ public class ProductController {
         product.setProductName(addProductName.getText());
         product.setListedPrice(Integer.parseInt(addListedPrice.getText()));
         product.setVendorId(vendorNameCombo.getSelectionModel().getSelectedItem().getKey());
+        product.setTags(addProductTag.getText());
         productDao.addProduct(product);
         addProductOkButton.getScene().getWindow().hide();
     }

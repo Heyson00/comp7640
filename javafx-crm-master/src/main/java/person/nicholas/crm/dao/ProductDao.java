@@ -89,10 +89,40 @@ public class ProductDao {
             pstmtP.setInt(2, p.getListedPrice());
             pstmtP.setInt(3, p.getVendorId());
             pstmtP.executeUpdate();
-
-//            sqlTag = "INSERT INTO tag(tag_name) VALUES (?)";
-//            pstmtT = dbConfig.getConnection().prepareStatement(sqlTag);
-//            pstmtT.setString(1, );
+            
+            //set tag
+            String[] tags = p.getTags().split(",");
+            for(String tag : tags){
+                String queryTag = "SELECT tag_id FROM tag WHERE tag_name = ?";
+                pstmtT = dbConfig.getConnection().prepareStatement(queryTag);
+                pstmtT.setString(1, tag);
+                ResultSet resultSet = pstmtT.executeQuery();
+                if(resultSet.next()){
+                    int tagId = resultSet.getInt("tag_id");
+                    sqlTag = "INSERT INTO product_tag(product_id, tag_id) VALUES (?, ?)";
+                    pstmtT = dbConfig.getConnection().prepareStatement(sqlTag);
+                    pstmtT.setInt(1, p.getProductId());
+                    pstmtT.setInt(2, tagId);
+                    pstmtT.executeUpdate();
+                }else{
+                    sqlTag = "INSERT INTO tag(tag_name) VALUES (?)";
+                    pstmtT = dbConfig.getConnection().prepareStatement(sqlTag);
+                    pstmtT.setString(1, tag);
+                    pstmtT.executeUpdate();
+                    sqlTag = "SELECT tag_id FROM tag WHERE tag_name = ?";
+                    pstmtT = dbConfig.getConnection().prepareStatement(sqlTag);
+                    pstmtT.setString(1, tag);
+                    resultSet = pstmtT.executeQuery();
+                    if(resultSet.next()){
+                        int tagId = resultSet.getInt("tag_id");
+                        sqlTag = "INSERT INTO product_tag(product_id, tag_id) VALUES (?, ?)";
+                        pstmtT = dbConfig.getConnection().prepareStatement(sqlTag);
+                        pstmtT.setInt(1, p.getProductId());
+                        pstmtT.setInt(2, tagId);
+                        pstmtT.executeUpdate();
+                    }
+                }
+            }
 
         }catch(SQLException se){
             // 处理 JDBC 错误
