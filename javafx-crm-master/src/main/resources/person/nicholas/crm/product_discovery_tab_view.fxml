@@ -15,10 +15,10 @@
             <TableColumn prefWidth="75.0" text="Product ID" fx:id="productId"/>
             <TableColumn prefWidth="75.0" text="Name" fx:id="productName"/>
             <TableColumn prefWidth="75.0" text="Price" fx:id="listedPrice"/>
-            <TableColumn prefWidth="75.0" text="Vendor Id" fx:id="vendorId"/>
+            <TableColumn prefWidth="75.0" text="Vendor Name" fx:id="vendorName"/>
             <TableColumn prefWidth="75.0" text="Tags" fx:id="tags"/>
         </columns>
     </TableView>
-    <TextField layoutX="14.0" layoutY="15.0" />
-    <Button layoutX="182.0" layoutY="16.0" mnemonicParsing="false" text="Search" />
+    <TextField layoutX="14.0" layoutY="15.0" fx:id="searchProductField"/>
+    <Button layoutX="182.0" layoutY="16.0" mnemonicParsing="false" text="Search" fx:id="searchButton" onAction="#onSearchButtonClick"/>
 </AnchorPane>

@@ -3,15 +3,19 @@ package person.nicholas.crm.entity;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class Product {
     private final SimpleIntegerProperty productId = new SimpleIntegerProperty();
     private final SimpleStringProperty productName = new SimpleStringProperty();
     private final SimpleIntegerProperty listedPrice = new SimpleIntegerProperty();
-    private final SimpleIntegerProperty vendorId = new SimpleIntegerProperty();
+    private final SimpleStringProperty vendorName = new SimpleStringProperty();
     private final SimpleStringProperty tags = new SimpleStringProperty();
+    //Vendor Id related
+    private int vendorId;
 
     public Product() {
     }
@@ -20,7 +24,7 @@ public class Product {
         this.productId.set(productId);
         this.productName.set(productName);
         this.listedPrice.set(listedPrice);
-        this.vendorId.set(vendorId);
+        this.vendorId = vendorId;
     }
 
     public int getProductId() { return productId.get(); }
@@ -32,15 +36,15 @@ public class Product {
     public int getListedPrice() { return listedPrice.get(); }
     public void setListedPrice(int listedPrice) { this.listedPrice.set(listedPrice); }
     public SimpleIntegerProperty listedPriceProperty() { return listedPrice; }
-    public int getVendorId() { return  vendorId.get(); }
-    public void setVendorId(int vendorId) { this.vendorId.set(vendorId); }
-    public SimpleIntegerProperty vendorIdProperty() { return vendorId; }
 
     public String getTags() { return tags.get(); }
     public void setTags(String tags) { this.tags.set(tags); }
     public SimpleStringProperty tagsProperty() { return tags; }
 
+    public SimpleStringProperty vendorNameProperty() { return vendorName; }
 
+    public String getVendorName() { return vendorName.get(); }
+    public void setVendorName(String vendorName) { this.vendorName.set(vendorName); }
 
     // Constructor, getters, and setters
 }
