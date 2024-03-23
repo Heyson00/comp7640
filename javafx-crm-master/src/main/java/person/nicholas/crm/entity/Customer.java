@@ -6,14 +6,11 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class Customer {
-    private SimpleIntegerProperty customerId = new SimpleIntegerProperty(this, "customerId");
-    private SimpleStringProperty contactNum = new SimpleStringProperty(this, "contactNum");
-    private SimpleStringProperty customerName = new SimpleStringProperty(this, "customerName");
-//    private final SimpleStringProperty shippingStatus = new SimpleStringProperty(this, "shippingStatus");
-
+    private SimpleIntegerProperty customerId;
+    private SimpleStringProperty contactNum;
+    private SimpleStringProperty customerName;
 }
 
 
