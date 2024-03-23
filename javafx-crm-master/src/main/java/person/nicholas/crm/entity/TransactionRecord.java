@@ -5,18 +5,20 @@ import javafx.beans.property.SimpleStringProperty;
 import lombok.Data;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 @Data
 public class TransactionRecord {
-    private SimpleIntegerProperty productId = new SimpleIntegerProperty();
-    private SimpleIntegerProperty customerId = new SimpleIntegerProperty();
-    private SimpleIntegerProperty quantity = new SimpleIntegerProperty();
-    private SimpleIntegerProperty orderId = new SimpleIntegerProperty();
-    private SimpleStringProperty shippingStatus = new SimpleStringProperty();
-    private SimpleDateFormat transactionTime = new SimpleDateFormat();
+    private SimpleIntegerProperty productId;
+    private SimpleIntegerProperty customerId;
+    private SimpleIntegerProperty quantity;
+    private SimpleStringProperty orderId;
+    private SimpleStringProperty shippingStatus;
+    private Date transactionTime;
+
+    private SimpleStringProperty productName;
+    private SimpleStringProperty customerName;
 
 }

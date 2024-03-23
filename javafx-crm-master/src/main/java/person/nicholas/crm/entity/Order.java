@@ -9,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Order {
+    private SimpleStringProperty orderId;
     private SimpleIntegerProperty productId;
     private SimpleStringProperty productName;
     private SimpleStringProperty vendorName;

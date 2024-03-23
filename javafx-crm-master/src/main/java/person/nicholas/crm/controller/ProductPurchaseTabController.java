@@ -1,5 +1,6 @@
 package person.nicholas.crm.controller;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,35 +16,43 @@ import person.nicholas.crm.entity.Vendor;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class ProductPurchaseTabController {
     @FXML
     private TableView<TransactionRecord> transactionRecordTableView;
     @FXML
-    private TableColumn<TransactionRecord, Integer> orderId;
+    private TableColumn<TransactionRecord, String> orderId;
     @FXML
-    private TableColumn<TransactionRecord, Integer> productId;
+    private TableColumn<TransactionRecord, String> productName;
     @FXML
-    private TableColumn<TransactionRecord, Integer> customerId;
+    private TableColumn<TransactionRecord, String> customerName;
     @FXML
     private TableColumn<TransactionRecord, Integer> quantity;
     @FXML
     private TableColumn<TransactionRecord, String> shippingStatus;
+
     @FXML
     private Button addTransaction;
-//    private TableColumn<TransactionRecord, DateFormat> transactionTime;
+    @FXML
+    private TableColumn<TransactionRecord, String> transactionTime;
 
     private final TransactionDao transactionDao = new TransactionDao();
 
     @FXML
     private void initialize() {
-        orderId.setCellValueFactory(cellData -> cellData.getValue().getOrderId().asObject());
-        productId.setCellValueFactory(cellData -> cellData.getValue().getProductId().asObject());
-        customerId.setCellValueFactory(cellData -> cellData.getValue().getCustomerId().asObject());
+        orderId.setCellValueFactory(cellData -> cellData.getValue().getOrderId());
+        productName.setCellValueFactory(cellData -> cellData.getValue().getProductName());
+        customerName.setCellValueFactory(cellData -> cellData.getValue().getCustomerName());
         quantity.setCellValueFactory(cellData -> cellData.getValue().getQuantity().asObject());
         shippingStatus.setCellValueFactory(cellData -> cellData.getValue().getShippingStatus());
-//      transactionTime.setCellValueFactory(cellData -> cellData.getValue());
-
+        transactionTime.setCellValueFactory(cellData -> {
+            if (cellData.getValue().getTransactionTime() == null) {
+                return new SimpleStringProperty("");
+            }
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return new SimpleStringProperty(df.format(cellData.getValue().getTransactionTime()));
+        });
         ObservableList<TransactionRecord> data = FXCollections.observableArrayList(transactionDao.getTransactionList());
         transactionRecordTableView.setItems(data);
     }

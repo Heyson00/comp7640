@@ -13,11 +13,11 @@
     <TableView fx:id="transactionRecordTableView" layoutX="14.0" layoutY="48.0" prefHeight="405.0" prefWidth="487.0">
         <columns>
             <TableColumn fx:id="orderId" prefWidth="75.0" text="OrderId" />
-            <TableColumn fx:id="productId" prefWidth="75.0" text="Product ID" />
-            <TableColumn fx:id="customerId" prefWidth="75.0" text="Customer ID" />
+            <TableColumn fx:id="productName" prefWidth="75.0" text="Product Name" />
+            <TableColumn fx:id="customerName" prefWidth="75.0" text="Customer Name" />
             <TableColumn fx:id="quantity" prefWidth="75.0" text="Quantity" />
             <TableColumn fx:id="shippingStatus" prefWidth="103.0" text="ShippingStatus" />
-<!--            <TableColumn fx:id="transactionTime" prefWidth="130.0" text="Transaction Time" />-->
+            <TableColumn fx:id="transactionTime" prefWidth="130.0" text="Transaction Time" />
 
         </columns>
     </TableView>

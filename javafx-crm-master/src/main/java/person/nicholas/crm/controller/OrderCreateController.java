@@ -23,9 +23,9 @@ import person.nicholas.crm.entity.Order;
 import person.nicholas.crm.entity.TransactionRecord;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class OrderCreateController {
     @FXML
@@ -200,17 +200,25 @@ public class OrderCreateController {
         okButton.setOnAction(e -> {
             //Transaction Create
             List<TransactionRecord> transactionRecords = new ArrayList<>();
+            //Generate OrderId
+            String orderId = generateOrderId();
             tableView.getItems().forEach(order -> {
                 TransactionRecord transactionRecord = new TransactionRecord();
                 transactionRecord.setProductId(new SimpleIntegerProperty(order.getProductId().get()));
                 transactionRecord.setCustomerId(customerComboBox.getSelectionModel().getSelectedItem().getCustomerId());
                 transactionRecord.setQuantity(new SimpleIntegerProperty(order.getQty().get()));
-//                transactionRecord.setOrderId(new SimpleIntegerProperty(order.getOrderId().get()));
+                transactionRecord.setOrderId(new SimpleStringProperty(orderId));
                 transactionRecord.setShippingStatus(new SimpleStringProperty("Not Shipped"));
+                transactionRecord.setTransactionTime(new java.sql.Date(System.currentTimeMillis()));
                 transactionRecords.add(transactionRecord);
-            });transactionDao.batchAddTransaction(transactionRecords);
+            });
+
+            transactionDao.batchAddTransaction(transactionRecords);
 
             dialogStage.close();
+
+            //Clear Table
+            tableView.getItems().clear();
         });
 
         Button cancelButton = (Button) dialogPane.lookupButton(ButtonType.CANCEL);
@@ -219,6 +227,12 @@ public class OrderCreateController {
         });
 
         dialogStage.showAndWait();
+    }
+
+    private String generateOrderId() {
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        return dateFormat.format(date);
     }
 
 }
