@@ -3,11 +3,15 @@ package person.nicholas.crm.controller;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import person.nicholas.crm.HelloApplication;
 import person.nicholas.crm.dao.TransactionDao;
@@ -34,6 +38,10 @@ public class ProductPurchaseTabController {
 
     @FXML
     private Button addTransaction;
+    @FXML
+    private Button cancelButton;
+    @FXML
+    private Button deleteButton;
     @FXML
     private TableColumn<TransactionRecord, String> transactionTime;
 
@@ -74,5 +82,86 @@ public class ProductPurchaseTabController {
         // Populate the table
         ObservableList<TransactionRecord> data = FXCollections.observableArrayList(transactionDao.getTransactionList());
         transactionRecordTableView.setItems(data);
+    }
+
+    @FXML
+    protected void onCancelButtonClick() {
+        if (transactionRecordTableView.getSelectionModel().isEmpty()) {
+            DialogPane dialogPane = new DialogPane();
+            dialogPane.setContentText("Please select a record.");
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Cancel");
+            dialogStage.initOwner(cancelButton.getScene().getWindow());
+            dialogStage.setScene(new Scene(dialogPane));
+            dialogStage.showAndWait();
+            return;
+        }
+        String orderId = transactionRecordTableView.getSelectionModel().getSelectedItem().getOrderId().get();
+        int transactionId = transactionRecordTableView.getSelectionModel().getSelectedItem().getTransactionId();
+        DialogPane dialogPane = new DialogPane();
+        Label warningText = new Label("Are you sure you want to cancel?");
+        Button cancelProductButton = new Button("Cancel product");
+        Button cancelOrderButton = new Button("Cancel order");
+        VBox vBox = new VBox(warningText, cancelProductButton, cancelOrderButton);
+        vBox.setAlignment(Pos.CENTER);
+        dialogPane.setContent(vBox);
+
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Cancel");
+        dialogStage.initOwner(cancelButton.getScene().getWindow());
+        dialogStage.setScene(new Scene(dialogPane));
+
+
+        cancelProductButton.setOnAction(e -> {
+            transactionDao.cancelTransaction(transactionId);
+            transactionRecordTableView.setItems(FXCollections.observableArrayList(transactionDao.getTransactionList()));
+            dialogStage.close();
+        });
+
+        cancelOrderButton.setOnAction(e -> {
+            transactionDao.cancelOrder(orderId);
+            transactionRecordTableView.setItems(FXCollections.observableArrayList(transactionDao.getTransactionList()));
+            dialogStage.close();
+        });
+
+        dialogStage.showAndWait();
+    }
+
+    @FXML
+    protected void onDeleteButtonClick() {
+        if (transactionRecordTableView.getSelectionModel().isEmpty()) {
+            DialogPane dialogPane = new DialogPane();
+            dialogPane.setContentText("Please select a record.");
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Delete");
+            dialogStage.initOwner(deleteButton.getScene().getWindow());
+            dialogStage.setScene(new Scene(dialogPane));
+            dialogStage.showAndWait();
+            return;
+        }
+        DialogPane dialogPane = new DialogPane();
+        Label warningLabel = new Label("Warning: This action will delete the order and all related transactions.");
+        Label warningLabel2 = new Label("Are you sure you want to delete?");
+        Button okButton = new Button("OK");
+        Button cancelButton = new Button("Cancel");
+        VBox vBox = new VBox(warningLabel, warningLabel2, okButton, cancelButton);
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(10);
+        dialogPane.setContent(vBox);
+
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Delete");
+        dialogStage.initOwner(deleteButton.getScene().getWindow());
+        dialogStage.setScene(new Scene(dialogPane));
+        cancelButton.setOnAction(e -> {
+            dialogStage.close();
+        });
+
+        okButton.setOnAction(e -> {
+            transactionDao.deleteOrder(transactionRecordTableView.getSelectionModel().getSelectedItem().getOrderId().get());
+            transactionRecordTableView.setItems(FXCollections.observableArrayList(transactionDao.getTransactionList()));
+            dialogStage.close();
+        });
+        dialogStage.showAndWait();
     }
 }

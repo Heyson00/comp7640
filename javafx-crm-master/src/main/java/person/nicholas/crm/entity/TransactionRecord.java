@@ -11,6 +11,8 @@ import java.util.List;
 
 @Data
 public class TransactionRecord {
+
+    private int transactionId;
     private SimpleIntegerProperty productId;
     private SimpleIntegerProperty customerId;
     private SimpleIntegerProperty quantity;

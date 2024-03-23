@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="person.nicholas.crm.controller.ProductPurchaseTabController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="person.nicholas.crm.controller.ProductPurchaseTabController">
     <TableView fx:id="transactionRecordTableView" layoutX="14.0" layoutY="48.0" prefHeight="405.0" prefWidth="487.0">
         <columns>
             <TableColumn fx:id="orderId" prefWidth="75.0" text="OrderId" />
@@ -18,8 +14,9 @@
             <TableColumn fx:id="quantity" prefWidth="75.0" text="Quantity" />
             <TableColumn fx:id="shippingStatus" prefWidth="103.0" text="ShippingStatus" />
             <TableColumn fx:id="transactionTime" prefWidth="130.0" text="Transaction Time" />
-
         </columns>
     </TableView>
-    <Button fx:id="addTransaction" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Purchase" onAction="#onPurchaseButtonClick"/>
+    <Button fx:id="addTransaction" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onPurchaseButtonClick" text="Purchase" />
+    <Button fx:id="cancelButton" layoutX="99.0" layoutY="14.0" mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="27.0" prefWidth="70.0" text="Cancel" />
+    <Button fx:id="deleteButton" layoutX="188.0" layoutY="14.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="63.0" text="Delete" onAction="#onDeleteButtonClick" />
 </AnchorPane>

@@ -32,6 +32,7 @@ public class TransactionDao {
 
             while(rs.next()){
                 TransactionRecord t = new TransactionRecord();
+                t.setTransactionId(rs.getInt("transaction_id"));
                 t.setOrderId(new SimpleStringProperty(rs.getString("order_id")));
                 t.setProductId(new SimpleIntegerProperty(rs.getInt("product_id")));
                 t.setCustomerId(new SimpleIntegerProperty(rs.getInt("customer_id")));
@@ -100,5 +101,59 @@ public class TransactionDao {
             // 处理 Class.forName 错误
         }
 
+    }
+
+    //update
+    public void cancelTransaction(int transactionId) {
+        PreparedStatement pstmt = null;
+        try{
+            String sql;
+            sql = "UPDATE transaction_record SET shipping_status = ? WHERE transaction_id = ?";
+            pstmt = dbConfig.getConnection().prepareStatement(sql);
+            pstmt.setString(1, "Cancelled");
+            pstmt.setInt(2, transactionId);
+            pstmt.executeUpdate();
+        }catch(SQLException se){
+            // 处理 JDBC 错误
+            se.printStackTrace();
+        }catch(Exception e){
+            // 处理 Class.forName 错误
+            e.printStackTrace();
+        }
+    }
+
+    public void cancelOrder(String orderId) {
+        PreparedStatement pstmt = null;
+        try{
+            String sql;
+            sql = "UPDATE transaction_record SET shipping_status = ? WHERE order_id = ?";
+            pstmt = dbConfig.getConnection().prepareStatement(sql);
+            pstmt.setString(1, "Cancelled");
+            pstmt.setString(2, orderId);
+            pstmt.executeUpdate();
+        }catch(SQLException se){
+            // 处理 JDBC 错误
+            se.printStackTrace();
+        }catch(Exception e){
+            // 处理 Class.forName 错误
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteOrder(String orderId) {
+        PreparedStatement pstmt = null;
+        try {
+            String sql;
+            sql = "DELETE FROM transaction_record WHERE order_id = ?";
+            pstmt = dbConfig.getConnection().prepareStatement(sql);
+            pstmt.setString(1, orderId);
+            pstmt.executeUpdate();
+        } catch (SQLException se) {
+            // 处理 JDBC 错误
+            se.printStackTrace();
+        } catch (Exception e) {
+            // 处理 Class.forName 错误
+            e.printStackTrace();
+        }
     }
 }
