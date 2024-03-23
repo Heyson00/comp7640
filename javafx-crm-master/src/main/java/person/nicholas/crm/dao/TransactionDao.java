@@ -1,5 +1,7 @@
 package person.nicholas.crm.dao;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import person.nicholas.crm.config.DatabaseConfig;
 import person.nicholas.crm.entity.TransactionRecord;
 import person.nicholas.crm.entity.Vendor;
@@ -27,11 +29,11 @@ public class TransactionDao {
 
             while(rs.next()){
                 TransactionRecord t = new TransactionRecord();
-                t.setOrderId(rs.getInt("order_id"));
-                t.setProductId(rs.getInt("product_id"));
-                t.setCustomerId(rs.getInt("customer_id"));
-                t.setQuantity(rs.getInt("quantity"));
-                t.setShippingStatus(rs.getString("shipping_status"));
+                t.setOrderId(new SimpleIntegerProperty(rs.getInt("order_id")));
+                t.setProductId(new SimpleIntegerProperty(rs.getInt("product_id")));
+                t.setCustomerId(new SimpleIntegerProperty(rs.getInt("customer_id")));
+                t.setQuantity(new SimpleIntegerProperty(rs.getInt("quantity")));
+                t.setShippingStatus(new SimpleStringProperty(rs.getString("shipping_status")));
 
                 transactionRecordArrayList.add(t);
             }
@@ -53,11 +55,11 @@ public class TransactionDao {
             String sql;
             sql = "INSERT INTO transaction_record (product_id, customer_id, quantity, order_id, shipping_status) VALUES (?, ?, ?, ?, ?)";
             pstmt = dbConfig.getConnection().prepareStatement(sql);
-            pstmt.setInt(1, t.getProductId());
-            pstmt.setInt(2, t.getCustomerId());
-            pstmt.setInt(3, t.getQuantity());
-            pstmt.setInt(4, t.getOrderId());
-            pstmt.setString(5, t.getShippingStatus());
+            pstmt.setInt(1, t.getProductId().get());
+            pstmt.setInt(2, t.getCustomerId().get());
+            pstmt.setInt(3, t.getQuantity().get());
+            pstmt.setInt(4, t.getOrderId().get());
+            pstmt.setString(5, t.getShippingStatus().get());
             pstmt.executeUpdate();
         }catch(SQLException se){
             // 处理 JDBC 错误
@@ -66,5 +68,29 @@ public class TransactionDao {
             // 处理 Class.forName 错误
             e.printStackTrace();
         }
+    }
+
+    public void batchAddTransaction(List<TransactionRecord> t){
+        PreparedStatement pstmt = null;
+        try{
+            String sql;
+            sql = "INSERT INTO transaction_record (product_id, customer_id, quantity, order_id, shipping_status) VALUES (?, ?, ?, ?, ?)";
+            pstmt = dbConfig.getConnection().prepareStatement(sql);
+            for(TransactionRecord transactionRecord : t){
+                pstmt.setInt(1, transactionRecord.getProductId().get());
+                pstmt.setInt(2, transactionRecord.getCustomerId().get());
+                pstmt.setInt(3, transactionRecord.getQuantity().get());
+                pstmt.setInt(4, transactionRecord.getOrderId().get());
+                pstmt.setString(5, transactionRecord.getShippingStatus().get());
+                pstmt.addBatch();
+            }
+            pstmt.executeBatch();
+        }catch(SQLException se){
+            // 处理 JDBC 错误
+            se.printStackTrace();
+        }catch(Exception e) {
+            // 处理 Class.forName 错误
+        }
+
     }
 }

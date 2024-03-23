@@ -14,7 +14,7 @@ public class ProductDao {
     private final DatabaseConfig dbConfig;
     public ProductDao() { dbConfig = DatabaseConfig.getInstance(); }
 
-    public List<Product> getVendorList() {
+    public List<Product> getProductList() {
         String sql = "SELECT pd.*, GROUP_CONCAT(DISTINCT t.tag_name ORDER BY t.tag_name SEPARATOR ',') as tags, v.business_name\n" +
                 "FROM product pd\n" +
                 "         LEFT JOIN product_tag pt ON pd.product_id = pt.product_id\n" +

@@ -39,7 +39,7 @@ public class ProductDiscoveryTabController {
         vendorName.setCellValueFactory(cellData -> cellData.getValue().vendorNameProperty());
         tags.setCellValueFactory(cellData -> cellData.getValue().tagsProperty());
 
-        ObservableList<Product> data = FXCollections.observableArrayList(productDao.getVendorList());
+        ObservableList<Product> data = FXCollections.observableArrayList(productDao.getProductList());
         productTableView.setItems(data);
     }
 

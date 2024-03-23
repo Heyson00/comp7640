@@ -37,11 +37,11 @@ public class ProductPurchaseTabController {
 
     @FXML
     private void initialize() {
-        orderId.setCellValueFactory(cellData -> cellData.getValue().productIdProperty().asObject());
-        productId.setCellValueFactory(cellData -> cellData.getValue().productIdProperty().asObject());
-        customerId.setCellValueFactory(cellData -> cellData.getValue().customerIdProperty().asObject());
-        quantity.setCellValueFactory(cellData -> cellData.getValue().quantityProperty().asObject());
-        shippingStatus.setCellValueFactory(cellData -> cellData.getValue().shippingStatusProperty());
+        orderId.setCellValueFactory(cellData -> cellData.getValue().getOrderId().asObject());
+        productId.setCellValueFactory(cellData -> cellData.getValue().getProductId().asObject());
+        customerId.setCellValueFactory(cellData -> cellData.getValue().getCustomerId().asObject());
+        quantity.setCellValueFactory(cellData -> cellData.getValue().getQuantity().asObject());
+        shippingStatus.setCellValueFactory(cellData -> cellData.getValue().getShippingStatus());
 //      transactionTime.setCellValueFactory(cellData -> cellData.getValue());
 
         ObservableList<TransactionRecord> data = FXCollections.observableArrayList(transactionDao.getTransactionList());
@@ -49,9 +49,9 @@ public class ProductPurchaseTabController {
     }
 
     @FXML
-    protected void onAddButtonClick() throws IOException {
+    protected void onPurchaseButtonClick() throws IOException {
         //弹窗transaction-add
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("transaction_add_view.fxml"));
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("order_create_view.fxml"));
         Parent popupContent = loader.load();
 
         // Create the dialog Stage

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="263.0" prefWidth="334.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="person.nicholas.crm.controller.TransactionController">
+    <TextField fx:id="addQuantity" layoutX="129.0" layoutY="108.0" prefHeight="27.0" prefWidth="150.0" />
+    <Label layoutX="32.0" layoutY="36.0" text="Product ID" />
+    <Label layoutX="38.0" layoutY="113.0" text="Quantity" />
+    <Button fx:id="addTransactionOkButton" layoutX="59.0" layoutY="165.0" mnemonicParsing="false" onAction="#onOkButtonClick" prefHeight="55.0" prefWidth="216.0" text="OK" />
+   <ComboBox layoutX="129.0" layoutY="31.0" prefWidth="150.0" fx:id="productComboBox" />
+</AnchorPane>

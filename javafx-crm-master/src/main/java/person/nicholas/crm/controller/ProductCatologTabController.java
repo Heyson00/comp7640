@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import person.nicholas.crm.HelloApplication;
 import person.nicholas.crm.dao.ProductDao;
 import person.nicholas.crm.entity.Product;
-import person.nicholas.crm.entity.Vendor;
 
 import java.io.IOException;
 
@@ -45,7 +44,7 @@ public class ProductCatologTabController {
         vendorName.setCellValueFactory(cellData -> cellData.getValue().vendorNameProperty());
         tags.setCellValueFactory(cellData -> cellData.getValue().tagsProperty());
 
-        ObservableList<Product> data = FXCollections.observableArrayList(productDao.getVendorList());
+        ObservableList<Product> data = FXCollections.observableArrayList(productDao.getProductList());
         productTableView.setItems(data);
     }
 
@@ -63,7 +62,7 @@ public class ProductCatologTabController {
         dialogStage.showAndWait();
 
         // Populate the table
-        ObservableList<Product> data = FXCollections.observableArrayList(productDao.getVendorList());
+        ObservableList<Product> data = FXCollections.observableArrayList(productDao.getProductList());
         productTableView.setItems(data);
     }
 }
