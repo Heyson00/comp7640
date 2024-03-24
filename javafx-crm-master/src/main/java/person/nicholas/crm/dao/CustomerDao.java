@@ -39,7 +39,7 @@ public class CustomerDao {
         try {
             statement = DatabaseConfig.getInstance().getConnection().prepareStatement(sql);
             statement.setString(1, customer.getContactNum().get());
-            statement.setString(2, customer.getContactNum().get());
+            statement.setString(2, customer.getCustomerName().get());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -52,7 +52,7 @@ public class CustomerDao {
         try {
             statement = DatabaseConfig.getInstance().getConnection().prepareStatement(sql);
             statement.setString(1, customer.getContactNum().get());
-            statement.setString(2, customer.getContactNum().get());
+            statement.setString(2, customer.getCustomerName().get());
             statement.setInt(3, customer.getCustomerId().get());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -68,6 +68,27 @@ public class CustomerDao {
             statement.setInt(1, customer.getCustomerId().get());
             statement.executeUpdate();
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Customer> getCustomerByName(String name) {
+        String sql = "SELECT * FROM customer_profiles WHERE customer_name LIKE ?";
+        PreparedStatement statement;
+        try {
+            statement = DatabaseConfig.getInstance().getConnection().prepareStatement(sql);
+            statement.setString(1, "%"+name+"%");
+            ResultSet resultSet = statement.executeQuery();
+            List<Customer> customers = new ArrayList<>();
+            while (resultSet.next()) {
+                Customer customer = new Customer();
+                customer.setCustomerName(new SimpleStringProperty(resultSet.getString("customer_name")));
+                customer.setCustomerId(new SimpleIntegerProperty(resultSet.getInt("customer_id")));
+                customer.setContactNum(new SimpleStringProperty(resultSet.getString("contact_num")));
+                customers.add(customer);
+            }
+            return customers;
+        }catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
