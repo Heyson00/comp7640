@@ -12,7 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import person.nicholas.crm.dao.CustomerDao;
 import person.nicholas.crm.entity.Customer;
-import person.nicholas.crm.entity.Vendor;
 
 public class CustomerTabController {
     @FXML

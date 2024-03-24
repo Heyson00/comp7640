@@ -4,9 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import person.nicholas.crm.config.DatabaseConfig;
 import person.nicholas.crm.entity.TransactionRecord;
-import person.nicholas.crm.entity.Vendor;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,6 +39,9 @@ public class TransactionDao {
 
                 t.setCustomerName(new SimpleStringProperty(rs.getString("customer_name")));
                 t.setProductName(new SimpleStringProperty(rs.getString("product_name")));
+
+
+                t.setTransactionTime(rs.getDate("transaction_time"));
                 transactionRecordArrayList.add(t);
             }
 
@@ -54,27 +55,6 @@ public class TransactionDao {
         return transactionRecordArrayList;
     }
 
-
-    public void addTransaction(TransactionRecord t){
-        PreparedStatement pstmt = null;
-        try{
-            String sql;
-            sql = "INSERT INTO transaction_record (product_id, customer_id, quantity, order_id, shipping_status) VALUES (?, ?, ?, ?, ?)";
-            pstmt = dbConfig.getConnection().prepareStatement(sql);
-            pstmt.setInt(1, t.getProductId().get());
-            pstmt.setInt(2, t.getCustomerId().get());
-            pstmt.setInt(3, t.getQuantity().get());
-            pstmt.setString(4, t.getOrderId().get());
-            pstmt.setString(5, t.getShippingStatus().get());
-            pstmt.executeUpdate();
-        }catch(SQLException se){
-            // 处理 JDBC 错误
-            se.printStackTrace();
-        }catch(Exception e){
-            // 处理 Class.forName 错误
-            e.printStackTrace();
-        }
-    }
 
     public void batchAddTransaction(List<TransactionRecord> t){
         PreparedStatement pstmt = null;

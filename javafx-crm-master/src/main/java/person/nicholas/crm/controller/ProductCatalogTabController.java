@@ -16,7 +16,7 @@ import person.nicholas.crm.entity.Product;
 
 import java.io.IOException;
 
-public class ProductCatologTabController {
+public class ProductCatalogTabController {
     @FXML
     private TableView<Product> productTableView;
     @FXML

@@ -50,11 +50,12 @@ public class ProductDao {
                 "         LEFT JOIN product_tag pt ON pd.product_id = pt.product_id\n" +
                 "         LEFT JOIN tag t ON pt.tag_id = t.tag_id\n" +
                 "         left join vendor v on v.vendor_id = pd.vendor_id\n" +
-                "WHERE pd.product_name LIKE '%" + productName + "%'\n" +
+                "WHERE pd.product_name LIKE ? \n" +
                 "GROUP BY pd.product_id";
         PreparedStatement statement;
         try {
             statement = DatabaseConfig.getInstance().getConnection().prepareStatement(sql);
+            statement.setString(1, "%" + productName + "%");
             ResultSet resultSet = statement.executeQuery();
             List<Product> products = new ArrayList<>();
             while (resultSet.next()) {
@@ -77,8 +78,8 @@ public class ProductDao {
     }
 
     public void addProduct(Product p){
-        PreparedStatement pstmtP = null;
-        PreparedStatement pstmtT = null;
+        PreparedStatement pstmtP;
+        PreparedStatement pstmtT;
         try{
             String sqlProduct;
             String sqlTag;

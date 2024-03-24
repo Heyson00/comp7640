@@ -3,22 +3,20 @@ package person.nicholas.crm.controller;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import person.nicholas.crm.HelloApplication;
 import person.nicholas.crm.dao.TransactionDao;
 import person.nicholas.crm.entity.TransactionRecord;
-import person.nicholas.crm.entity.Vendor;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -55,12 +53,17 @@ public class ProductPurchaseTabController {
         quantity.setCellValueFactory(cellData -> cellData.getValue().getQuantity().asObject());
         shippingStatus.setCellValueFactory(cellData -> cellData.getValue().getShippingStatus());
         transactionTime.setCellValueFactory(cellData -> {
-            if (cellData.getValue().getTransactionTime() == null) {
+            Date transactionTime = cellData.getValue().getTransactionTime();
+            if (transactionTime != null) {
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                // 确保格式化操作不会被多线程共享的DateFormat实例影响
+                String formattedDate = df.format(transactionTime);
+                return new SimpleStringProperty(formattedDate);
+            } else {
                 return new SimpleStringProperty("");
             }
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            return new SimpleStringProperty(df.format(cellData.getValue().getTransactionTime()));
         });
+
         ObservableList<TransactionRecord> data = FXCollections.observableArrayList(transactionDao.getTransactionList());
         transactionRecordTableView.setItems(data);
     }

@@ -14,7 +14,6 @@ import person.nicholas.crm.dao.ProductDao;
 import person.nicholas.crm.dao.TransactionDao;
 import person.nicholas.crm.entity.Order;
 import person.nicholas.crm.entity.Product;
-import person.nicholas.crm.entity.TransactionRecord;
 
 public class TransactionController {
     @FXML

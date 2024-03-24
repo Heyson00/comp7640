@@ -1,10 +1,8 @@
 package person.nicholas.crm.controller;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,9 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Pair;
-import lombok.Getter;
-import lombok.Setter;
 import person.nicholas.crm.HelloApplication;
 import person.nicholas.crm.dao.CustomerDao;
 import person.nicholas.crm.dao.TransactionDao;

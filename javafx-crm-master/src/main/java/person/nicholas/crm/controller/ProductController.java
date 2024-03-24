@@ -6,13 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
-import javafx.util.Pair;
 import person.nicholas.crm.dao.ProductDao;
 import person.nicholas.crm.dao.VendorDao;
 import person.nicholas.crm.entity.Product;
 import person.nicholas.crm.entity.Vendor;
-
-import java.util.stream.Collectors;
 
 public class ProductController {
     @FXML
@@ -20,7 +17,7 @@ public class ProductController {
     @FXML
     private TextField addListedPrice;
     @FXML
-    private ComboBox<Pair<Integer,String>> vendorNameCombo = new ComboBox<>();
+    private ComboBox<Vendor> vendorNameCombo;
     @FXML
     private Button addProductOkButton;
     @FXML
@@ -32,35 +29,28 @@ public class ProductController {
     //初始化数据
     @FXML
     protected void initialize() {
-        vendorNameCombo.getItems().addAll(vendorDao.getVendorList().stream().map(vendor -> new Pair<>(vendor.getVendorId(), vendor.getBusinessName())).collect(Collectors.toList()));
-        vendorNameCombo.setCellFactory(param -> new javafx.scene.control.ListCell<>() {
-            @Override
-            protected void updateItem(Pair<Integer, String> item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null || item.getKey() == null) {
-                    setText(null);
-                } else {
-                    setText(item.getValue());
-                }
-            }
-        });
-
+        vendorNameCombo.setItems(FXCollections.observableArrayList(vendorDao.getVendorList()));
         vendorNameCombo.setButtonCell(new ListCell<>() {
             @Override
-            protected void updateItem(Pair<Integer, String> item, boolean empty) {
+            protected void updateItem(Vendor item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty || item == null || item.getKey() == null) {
+                if (item == null || empty) {
                     setText(null);
                 } else {
-                    setText(item.getValue());
+                    setText(item.getBusinessName());
                 }
             }
         });
 
-        vendorNameCombo.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null) {
-                System.out.println("选中的键: " + newVal.getKey());
-                System.out.println("选中的值: " + newVal.getValue());
+        vendorNameCombo.setCellFactory(param -> new ListCell<>() {
+            @Override
+            protected void updateItem(Vendor item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setText(null);
+                } else {
+                    setText(item.getBusinessName());
+                }
             }
         });
     }
@@ -70,7 +60,7 @@ public class ProductController {
         Product product = new Product();
         product.setProductName(addProductName.getText());
         product.setListedPrice(Integer.parseInt(addListedPrice.getText()));
-        product.setVendorId(vendorNameCombo.getSelectionModel().getSelectedItem().getKey());
+        product.setVendorId(vendorNameCombo.getSelectionModel().getSelectedItem().getVendorId());
         product.setTags(addProductTag.getText());
         productDao.addProduct(product);
         addProductOkButton.getScene().getWindow().hide();

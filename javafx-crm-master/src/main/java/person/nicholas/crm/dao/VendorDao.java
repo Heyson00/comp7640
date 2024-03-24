@@ -3,7 +3,6 @@ package person.nicholas.crm.dao;
 import person.nicholas.crm.config.DatabaseConfig;
 import person.nicholas.crm.entity.Vendor;
 
-import java.sql.Connection;
 import java.sql.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
