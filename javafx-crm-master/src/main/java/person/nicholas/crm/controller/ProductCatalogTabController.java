@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import person.nicholas.crm.HelloApplication;
 import person.nicholas.crm.dao.ProductDao;
@@ -29,9 +30,12 @@ public class ProductCatalogTabController {
     private TableColumn<Product, String> vendorName;
     @FXML
     private TableColumn<Product, String> tags;
-
+    @FXML
+    private TextField searchProductField1;
     @FXML
     private Button addProduct;
+    @FXML
+    private Button searchButton;
 
     private final ProductDao productDao = new ProductDao();
 
@@ -63,6 +67,13 @@ public class ProductCatalogTabController {
 
         // Populate the table
         ObservableList<Product> data = FXCollections.observableArrayList(productDao.getProductList());
+        productTableView.setItems(data);
+    }
+
+    @FXML
+    private void onSearchButtonClick() {
+        String searchText = searchProductField1.getText();
+        ObservableList<Product> data = FXCollections.observableArrayList(productDao.getProductListByVendorName(searchText));
         productTableView.setItems(data);
     }
 }

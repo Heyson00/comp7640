@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane  xmlns="http://javafx.com/javafx"
-             xmlns:fx="http://javafx.com/fxml"
-             fx:controller="person.nicholas.crm.controller.ProductCatalogTabController"
-             prefHeight="400.0" prefWidth="600.0">
-    <TableView layoutX="14.0" layoutY="48.0" prefHeight="405.0" prefWidth="485.0" fx:id="productTableView">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="person.nicholas.crm.controller.ProductCatalogTabController">
+    <TableView fx:id="productTableView" layoutX="14.0" layoutY="48.0" prefHeight="405.0" prefWidth="485.0">
         <columns>
-            <TableColumn prefWidth="75.0" text="Product ID" fx:id="productId"/>
-            <TableColumn prefWidth="125.0" text="Name" fx:id="productName"/>
-            <TableColumn prefWidth="75.0" text="Price" fx:id="listedPrice"/>
-            <TableColumn prefWidth="75.0" text="Vendor Name" fx:id="vendorName"/>
-            <TableColumn prefWidth="115.0" text="Tags" fx:id="tags"/>
+            <TableColumn fx:id="productId" prefWidth="75.0" text="Product ID" />
+            <TableColumn fx:id="productName" prefWidth="125.0" text="Name" />
+            <TableColumn fx:id="listedPrice" prefWidth="75.0" text="Price" />
+            <TableColumn fx:id="vendorName" prefWidth="75.0" text="Vendor Name" />
+            <TableColumn fx:id="tags" prefWidth="115.0" text="Tags" />
         </columns>
     </TableView>
-    <Button fx:id="addProduct" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" text="Add" onAction="#onAddButtonClick"/>
+    <Button fx:id="addProduct" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#onAddButtonClick" text="Add" />
+   <TextField layoutX="279.0" layoutY="14.0" promptText="Input vendor" fx:id="searchProductField1"/>
+   <Button layoutX="444.0" layoutY="15.0" mnemonicParsing="false" text="Search" fx:id="searchButton" onAction="#onSearchButtonClick"/>
 </AnchorPane>
