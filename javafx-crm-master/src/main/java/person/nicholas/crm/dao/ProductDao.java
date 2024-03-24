@@ -50,7 +50,7 @@ public class ProductDao {
                 "         LEFT JOIN product_tag pt ON pd.product_id = pt.product_id\n" +
                 "         LEFT JOIN tag t ON pt.tag_id = t.tag_id\n" +
                 "         left join vendor v on v.vendor_id = pd.vendor_id\n" +
-                "WHERE pd.product_name LIKE ? \n" +
+                "WHERE t.tag_name LIKE ? \n" +
                 "GROUP BY pd.product_id";
         PreparedStatement statement;
         try {
