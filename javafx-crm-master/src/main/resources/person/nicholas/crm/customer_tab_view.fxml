@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="person.nicholas.crm.controller.CustomerTabController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="person.nicholas.crm.controller.CustomerTabController">
     <TableView fx:id="customerTableView" layoutX="14.0" layoutY="48.0" prefHeight="405.0" prefWidth="487.0">
         <columns>
             <TableColumn fx:id="customerId" prefWidth="103.0" text="Customer ID" />
@@ -14,8 +14,8 @@
             <TableColumn fx:id="contactNum" prefWidth="125.0" text="Contact Number" />
         </columns>
     </TableView>
-    <Button fx:id="deleteCustomer" layoutX="157.0" layoutY="15.0" mnemonicParsing="false" text="Delete" onAction="#deleteCustomer"/>
-    <Button fx:id="searchCustomer" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" text="Search" onAction="#searchCustomer" />
-    <Button fx:id="addCustomer" layoutX="99.0" layoutY="15.0" mnemonicParsing="false" text="Add" onAction="#addCustomer"/>
-    <TextField layoutX="300.0" layoutY="15.0" fx:id="searchCustomerField" />
+    <Button fx:id="deleteCustomer" layoutX="448.0" layoutY="15.0" mnemonicParsing="false" onAction="#deleteCustomer" text="Delete" />
+    <Button fx:id="searchCustomer" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#searchCustomer" text="Search" />
+    <Button fx:id="addCustomer" layoutX="388.0" layoutY="15.0" mnemonicParsing="false" onAction="#addCustomer" text="Add" />
+    <TextField fx:id="searchCustomerField" layoutX="81.0" layoutY="15.0" />
 </AnchorPane>
